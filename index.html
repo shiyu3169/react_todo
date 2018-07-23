@@ -53,13 +53,24 @@
 		}
 
 		class TodoForm extends React.Component {
+
+			onChange() {
+				console.log("Changing text...")
+			}	
+
 			render() {
 				return(
 					<div>
-						TODOFORM
+						<form>
+							<div className="form-group">
+								<label>Todo text</label>
+								<input onChange={this.onChange} type="text" ref="text" className="form-control" />
+							</div>
+						</form>
 					</div>
 				)
 			}
+
 		}
 
 		class TodoList extends React.Component {
