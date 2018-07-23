@@ -42,10 +42,21 @@
 				}
 			}
 
+			handleTodoAdd= (text) => {
+				var newTodo = {
+					id: this.state.todos.length + 1,
+					text: text
+				}
+
+				this.setState({
+					todos: this.state.todos.concat(newTodo)
+				});
+			}
+
 			render() {
 				return(
 					<div>
-						<TodoForm />
+						<TodoForm onTodoAdd={this.handleTodoAdd} />
 						<TodoList todos={this.state.todos} />
 					</div>
 				)
@@ -58,10 +69,23 @@
 				console.log("Changing text...")
 			}	
 
+			onSubmit = (e) => {
+				e.preventDefault();
+				var text = this.refs.text.value.trim();
+
+				if(!text) {
+					alert("Please enter a todo");
+					return;
+				}
+
+				this.props.onTodoAdd(text);
+				this.refs.text.value="";
+			}
+
 			render() {
 				return(
 					<div>
-						<form>
+						<form onSubmit={this.onSubmit}>
 							<div className="form-group">
 								<label>Todo text</label>
 								<input onChange={this.onChange} type="text" ref="text" className="form-control" />
