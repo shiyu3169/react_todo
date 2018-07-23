@@ -28,15 +28,15 @@
 					todos: [
 						{
 							id: 1,
-							name: "Meeting at work"
+							text: "Meeting at work"
 						},
 						{
 							id: 2,
-							name: "Bring kids to school"
+							text: "Bring kids to school"
 						},
 						{
 							id: 3,
-							name: "Food Shopping"
+							text: "Food Shopping"
 						},
 					]
 				}
@@ -68,7 +68,7 @@
 					<ul className="list-group">
 						{
 							this.props.todos.map(todo => {
-								return <li className="list-group-item" todo={todo} key={todo.id}>{todo.name}</li>
+								return <li className="list-group-item" todo={todo} key={todo.id}>{todo.text}</li>
 							})
 						}
 					</ul>
