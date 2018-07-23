@@ -46,7 +46,7 @@
 				return(
 					<div>
 						<TodoForm />
-						<TodoList todos={this.state.todos/>
+						<TodoList todos={this.state.todos} />
 					</div>
 				)
 			}
@@ -65,9 +65,13 @@
 		class TodoList extends React.Component {
 			render() {
 				return(
-					<div>
-						TODOLIST
-					</div>
+					<ul>
+						{
+							this.props.todos.map(todo => {
+								return <li todo={todo} key={todo.id}>{todo.name}</li>
+							})
+						}
+					</ul>
 				)
 			}
 		}
