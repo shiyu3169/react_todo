@@ -20,11 +20,33 @@
 	</div>
 	<script type="text/babel"> 
 		class App extends React.Component {
+
+			constructor(props) {
+				super(props);
+				this.state = {
+					text: '',
+					todos: [
+						{
+							id: 1,
+							name: "Meeting at work"
+						},
+						{
+							id: 2,
+							name: "Bring kids to school"
+						},
+						{
+							id: 3,
+							name: "Food Shopping"
+						},
+					]
+				}
+			}
+
 			render() {
 				return(
 					<div>
 						<TodoForm />
-						<TodoList />
+						<TodoList todos={this.state.todos/>
 					</div>
 				)
 			}
