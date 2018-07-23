@@ -11,6 +11,21 @@
 	<script type="text/javascript" src=https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js></script>
 	<!-- prop-types -->
 	<script src="https://unpkg.com/prop-types@15.6/prop-types.js"></script>
+	<!-- fire base -->
+	<script src="https://www.gstatic.com/firebasejs/5.3.0/firebase.js"></script>
+	<script>
+	  // Initialize Firebase
+	  // TODO: Replace with your project's customized code snippet
+	  var config = {
+	    apiKey: "AIzaSyArvXN8HDYesoDCuNG_4g6x8pMCZE6STm8",
+	    authDomain: "todolist-f6ea0.firebaseapp.com",
+	    databaseURL: "https://todolist-f6ea0.firebaseio.com",
+	    projectId: "todolist-f6ea0",
+	    storageBucket: "<BUCKET>.appspot.com",
+	    messagingSenderId: "773852700865",
+	  };
+	  firebase.initializeApp(config);
+	</script>
 </head>
 <body>
 	<div class="container">
@@ -25,22 +40,29 @@
 				super(props);
 				this.state = {
 					text: '',
-					todos: [
-						{
-							id: 1,
-							text: "Meeting at work"
-						},
-						{
-							id: 2,
-							text: "Bring kids to school"
-						},
-						{
-							id: 3,
-							text: "Food Shopping"
-						},
-					]
+					todos: []
 				}
 			}
+
+			componentWillMount() {
+				this.firebaseRef = firebase.database().ref();
+				this.firebaseRef.once("value", snapshot => {
+					var todos = [];
+					snapshot.forEach((data) => {
+						var todo = {
+							id: data.val().id,
+							text: data.val().text
+						}
+
+						todos.push(todo);
+
+						this.setState({
+							todos: todos
+						})
+					})
+				})
+			}
+
 
 			handleTodoAdd = (text) => {
 				var newTodo = {
@@ -48,6 +70,8 @@
 					isEdit: 0,
 					text: text
 				}
+
+				this.firebaseRef.push(newTodo);
 
 				this.setState({
 					todos: this.state.todos.concat(newTodo)
