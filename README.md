@@ -1,5 +1,9 @@
-# Simple React todo list
+# react_todo
+
+A simple todo application
+
+## Installation
+npm i - to install all dependencies
 
 ## Run
-
-Simply run the code with browser
+npm run
