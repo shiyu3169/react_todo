@@ -1,4 +1,5 @@
-Simple React todo list
+# Simple React todo list
 
-Run
-	Simply run the code with browser
+## Run
+
+Simply run the code with browser
